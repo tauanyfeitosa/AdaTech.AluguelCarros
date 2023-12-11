@@ -3,7 +3,6 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
 {
     using GerenciamentoInterno.Reservas;
     using GerenciamentoInterno.Pagamentos;
-    using GerenciamentoInterno.RetiradasDevolucoes;
     using Veiculos;
     internal class Funcionario
     {
@@ -12,6 +11,8 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
         private readonly string? _loginCPF;
         private string? _senha;
         private bool _ativo;
+
+        public string ? LoginCPF => _loginCPF;
 
         public Funcionario(string nome, string loginCPF, string senha, string confirmacaoSenha)
         {
@@ -26,7 +27,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
         }
 
         internal void CadastrarVeiculo(int assentos, int portas, decimal precoDiria, string modelo, string placa,
-            TipoVeiculos veiculos)
+            TipoVeiculosEnum veiculos)
         {
             EstoqueVeiculos.AdicionarVeiculo(assentos, portas, precoDiria, modelo, placa, veiculos);
 
@@ -35,8 +36,9 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
         internal bool VerificarPagamentoCliente (int id)
         {
             var reserva = AcervoReservas.SelecionarReserva(id);
-            if (reserva.PagamentoCliente.StatusPagamento == StatusPagamento.Pago)
+            if (reserva.PagamentoCliente.StatusPagamento == StatusPagamentoEnum.Pago)
             {
+                reserva.Veiculo.StatusCarro = StatusCarroEnum.Reservado;
                 return true;
             }
             return false;
@@ -47,7 +49,18 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
             var reserva = AcervoReservas.SelecionarReserva(id);
             if (VerificarPagamentoCliente(id))
             {
-                var retiradaVeiculo = new RetiradaVeiculo(reserva);
+                reserva.CriarRetiradaVeiculo();
+            }
+        }
+
+        internal void EfetivarRetirada (int id)
+        {
+            var reserva = AcervoReservas.SelecionarReserva(id);
+            if (reserva.RetiradaVeiculo.VeiculoRetirado)
+                reserva.RetiradaVeiculo.RetirarVeiculoDia(reserva);
+            else
+            {
+                Console.WriteLine("O veículo já foi retirado!");
             }
         }
     }

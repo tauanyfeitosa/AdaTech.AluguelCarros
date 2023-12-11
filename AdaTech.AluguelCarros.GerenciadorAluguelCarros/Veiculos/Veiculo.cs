@@ -5,13 +5,13 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
     {
         private readonly int _id;
         private bool _revisaoAtualizada;
-        private StatusCarro _statusCarro;
+        private StatusCarroEnum _statusCarro;
         private int _assentos;
         private int _portas;
         private decimal _precoDiaria;
         private string? _modelo;
         private string? _placa;
-        private TipoVeiculos _veiculos;
+        private TipoVeiculosEnum _veiculos;
 
         internal int Id
         {
@@ -24,7 +24,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
             set { _revisaoAtualizada = value; }
         }
 
-        internal StatusCarro StatusCarro
+        internal StatusCarroEnum StatusCarro
         {
             get { return _statusCarro; }
             set { _statusCarro = value; }
@@ -60,14 +60,14 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
             set { _placa = value; }
         }
 
-        internal TipoVeiculos Veiculos
+        internal TipoVeiculosEnum Veiculos
         {
             get { return _veiculos; }
             set { _veiculos = value; }
         }
 
         public Veiculo(int id, int assentos, int portas, decimal precoDiria, string modelo, string placa, 
-            TipoVeiculos veiculos)
+            TipoVeiculosEnum veiculos)
         {
             this._id = id;
             this._assentos = assentos;
@@ -77,7 +77,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
             this._placa = placa;
             this._veiculos = veiculos;
             this._revisaoAtualizada = true;
-            this._statusCarro = StatusCarro.Disponivel;
+            this._statusCarro = StatusCarroEnum.Disponivel;
         }
 
         internal decimal CalcularAluguel (int dias)

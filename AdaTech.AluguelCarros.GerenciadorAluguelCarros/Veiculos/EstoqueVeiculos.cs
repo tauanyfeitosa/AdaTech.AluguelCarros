@@ -6,7 +6,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
         private static List<Veiculo> _listaVeiculos = new List<Veiculo> ();
 
         internal static void AdicionarVeiculo(int assentos, int portas, decimal precoDiria, string modelo, string placa,
-    TipoVeiculos veiculos)
+    TipoVeiculosEnum veiculos)
         {
             var veiculo = new Veiculo(_listaVeiculos.Count, assentos, portas, precoDiria, modelo, placa, veiculos);
             _listaVeiculos.Add(veiculo);

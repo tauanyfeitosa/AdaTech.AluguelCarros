@@ -1,7 +1,8 @@
 ﻿namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.GerenciamentoInterno.Reservas
 {
-    using AdaTech.AluguelCarros.GerenciadorAluguelCarros.GerenciamentoInterno.Pagamentos;
-    using AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios;
+    using GerenciamentoInterno.Pagamentos;
+    using GerenciamentoInterno.RetiradasDevolucoes;
+    using Usuarios;
     using Veiculos;
 
     internal class Reserva
@@ -10,17 +11,50 @@
         private readonly Veiculo? _veiculo;
         private readonly Cliente? _ciente;
         private int _dias;
-        private readonly DateTime _dataInicio;
+        private DateTime _dataInicio;
         private DateTime _dataFim;
         private decimal _valorTotal;
         private bool reservaAutorizada = false;
         private readonly PagamentoCliente? _pagamentoCliente;
+        private RetiradaVeiculo _retiradaVeiculo;
+        private DevolucaoVeiculo _devolucaoVeiculo;
 
         public int Id { get { return _id; } }
         public Veiculo Veiculo { get { return _veiculo; } }
         public int Dias { get { return _dias; } }
-        public DateTime DataInicio { get { return _dataInicio; } }
+        public DateTime DataInicio
+        {
+            get { return _dataInicio; }
+            set
+            {
+                if (value >= DateTime.Now)
+                {
+                    _dataInicio = value;
+                }
+                else
+                {
+                    Console.WriteLine("A data de início não pode ser no passado.");
+                }
+            }
+        }
+        public DateTime DataFim
+        {
+            get { return _dataInicio; }
+            set
+            {
+                if (value >= DateTime.Now)
+                {
+                    _dataInicio = value;
+                }
+                else
+                {
+                    Console.WriteLine("A data de início não pode ser no passado.");
+                }
+            }
+        }
         public PagamentoCliente PagamentoCliente { get { return _pagamentoCliente; } }
+        public RetiradaVeiculo RetiradaVeiculo { get { return _retiradaVeiculo; } }
+        public DevolucaoVeiculo DevolucaoVeiculo { get { return _devolucaoVeiculo; } }
 
         private void CalcularDias()
         {
@@ -34,7 +68,7 @@
         }
 
         public Reserva(int id, Veiculo veiculo, Cliente cliente, DateTime dataInicio, DateTime dataFim, 
-            TipoPagamento tipoPagamento)
+            TipoPagamentoEnum tipoPagamento)
         {
             this._id = id;
             this._veiculo = veiculo;
@@ -44,6 +78,16 @@
             this._pagamentoCliente = new PagamentoCliente(this, tipoPagamento);
 
             AtualizarValorTotal();
+        }
+
+        internal void CriarRetiradaVeiculo ()
+        {
+            this._retiradaVeiculo = new RetiradaVeiculo(this);
+        }
+        
+        internal void CriarDevolucaoVeiculo ()
+        {
+            this._devolucaoVeiculo = new DevolucaoVeiculo(this);
         }
 
     }

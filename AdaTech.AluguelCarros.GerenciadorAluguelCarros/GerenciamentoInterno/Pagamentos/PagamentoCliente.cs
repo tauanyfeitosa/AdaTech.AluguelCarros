@@ -6,16 +6,16 @@
         private readonly decimal _valorPago;
         private readonly decimal _valorDevido;
         private DateTime _dataPagamento;
-        private StatusPagamento _statusPagamento;
-        private TipoPagamento _tipoPagamento;
+        private StatusPagamentoEnum _statusPagamento;
+        private TipoPagamentoEnum _tipoPagamento;
         private decimal _saldoCliente;
 
-        public StatusPagamento StatusPagamento { get { return _statusPagamento; } }
+        public StatusPagamentoEnum StatusPagamento { get { return _statusPagamento; } }
 
-        internal PagamentoCliente(Reserva reserva, TipoPagamento tipoPagamento)
+        internal PagamentoCliente(Reserva reserva, TipoPagamentoEnum tipoPagamento)
         {
             _valorDevido = reserva.Veiculo.CalcularAluguel(reserva.Dias);
-            _statusPagamento = StatusPagamento.EmAberto;
+            _statusPagamento = StatusPagamentoEnum.EmAberto;
             _tipoPagamento = tipoPagamento;
         }
 
@@ -24,7 +24,7 @@
             if (valorPago >= _valorDevido)
             {
                 _dataPagamento = DateTime.Now;
-                _statusPagamento = StatusPagamento.Pago;
+                _statusPagamento = StatusPagamentoEnum.Pago;
                 _saldoCliente = valorPago - _valorDevido;
             }
         }

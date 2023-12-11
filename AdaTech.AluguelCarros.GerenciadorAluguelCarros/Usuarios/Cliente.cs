@@ -36,7 +36,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
             set { _possuiCNH = value; }
         }
 
-        internal void FazerReserva (int idVeiculo, DateTime dataInicio, DateTime dataFim, TipoPagamento tipoPagamento)
+        internal void FazerReserva (int idVeiculo, DateTime dataInicio, DateTime dataFim, TipoPagamentoEnum tipoPagamento)
         {
             Veiculo veiculo = EstoqueVeiculos.SelecionarVeiculo(idVeiculo);
             var reservaCliente = new Reserva(idVeiculo, veiculo, this, dataInicio, dataFim, tipoPagamento);
