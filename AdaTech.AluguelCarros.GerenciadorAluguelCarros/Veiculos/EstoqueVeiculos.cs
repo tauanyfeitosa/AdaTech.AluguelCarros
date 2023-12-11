@@ -5,6 +5,8 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
     {
         private static List<Veiculo> _listaVeiculos = new List<Veiculo> ();
 
+        public static List<Veiculo> ListaVeiculos => _listaVeiculos;
+
         internal static void AdicionarVeiculo(int assentos, int portas, decimal precoDiria, string modelo, string placa,
     TipoVeiculosEnum veiculos)
         {
@@ -20,6 +22,16 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
         internal static Veiculo SelecionarVeiculo (int id)
         {
             return _listaVeiculos.FirstOrDefault(veiculo => veiculo.Id == id);
+        }
+
+        internal static void ImprimirVeiculos()
+        {
+            Console.WriteLine("Lista de Veículos:");
+
+            foreach (var veiculo in _listaVeiculos)
+            {
+                Console.WriteLine($"ID: {veiculo.Id}, Modelo: {veiculo.Modelo}, Placa: {veiculo.Placa}");
+            }
         }
     }
 }

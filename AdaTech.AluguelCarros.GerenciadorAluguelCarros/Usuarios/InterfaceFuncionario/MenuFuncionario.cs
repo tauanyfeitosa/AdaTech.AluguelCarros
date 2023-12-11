@@ -1,6 +1,10 @@
-﻿
+﻿using AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos;
+
 namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFuncionario
 {
+    using AcoesUsuarios;
+    using AdaTech.AluguelCarros.GerenciadorAluguelCarros.GerenciamentoInterno.Reservas;
+
     internal class MenuFuncionario
     {
         internal static void ExibirMenu(Funcionario funcionario)
@@ -9,7 +13,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFunci
 
             do
             {
-                Console.Clear(); 
+                Console.Clear();
 
                 Console.WriteLine($"Bem-vindo, {funcionario.Nome}!");
                 Console.WriteLine("Escolha uma opção:");
@@ -54,42 +58,70 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFunci
 
         private static void MenuTarefasEspecificas(Funcionario funcionario)
         {
-            Console.WriteLine("\n\nEscolha uma opção de suas tarefas específicas:");
-            Console.WriteLine("1. Cadastrar Veículo");
-            Console.WriteLine("2. Verificar o pagamento do cliente.");
-            Console.WriteLine("3. Autorizar retirada do veiculo.");
-            Console.WriteLine("4. Retirar veículo (mesmo fora do prazo)");
-            Console.WriteLine("5. Excluir veículo.");
-            Console.WriteLine("6. Sair.");
+            bool sair = false;
 
-            if (int.TryParse(Console.ReadLine(), out int escolha))
+            do
             {
-                switch (escolha)
+                Console.WriteLine("\n\nEscolha uma opção de suas tarefas específicas:");
+                Console.WriteLine("1. Cadastrar Veículo");
+                Console.WriteLine("2. Verificar o pagamento do cliente.");
+                Console.WriteLine("3. Autorizar retirada do veiculo.");
+                Console.WriteLine("4. Retirar veículo (mesmo fora do prazo)");
+                Console.WriteLine("5. Excluir veículo.");
+                Console.WriteLine("6. Sair.");
+
+                if (int.TryParse(Console.ReadLine(), out int escolha))
                 {
-                    case 1:
-                        funcionario.CadastrarVeiculo()
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    default:
-                        Console.WriteLine("Opção inválida. Tente novamente.");
-                        break;
+                    switch (escolha)
+                    {
+                        case 1:
+                            AcoesFuncionario.CadastrarVeiculo(funcionario);
+                            break;
+                        case 2:
+                            int idVeiculo = AcoesFuncionario.SelecionarVeiculo();
+                            var pagamentoRealizado = funcionario.VerificarPagamentoCliente(idVeiculo);
+                            break;
+                        case 3:
+                            idVeiculo = AcoesFuncionario.SelecionarVeiculo();
+                            if (AcervoReservas.SelecionarReserva(idVeiculo) != null && AcervoReservas.SelecionarReserva(idVeiculo).PagamentoCliente.StatusPagamento == 
+                                GerenciamentoInterno.Pagamentos.StatusPagamentoEnum.Pago)
+                            {
+                                funcionario.AutorizarRetirada(idVeiculo);
+                            }
+                            break;
+                        case 4:
+                            idVeiculo = AcoesFuncionario.SelecionarVeiculo();
+                            if (AcervoReservas.SelecionarReserva(idVeiculo) != null && AcervoReservas.SelecionarReserva(idVeiculo).PagamentoCliente.StatusPagamento ==
+                                GerenciamentoInterno.Pagamentos.StatusPagamentoEnum.Pago)
+                            {
+                                funcionario.EfetivarRetirada(idVeiculo);
+                            }
+                            break;
+                        case 5:
+                            idVeiculo = AcoesFuncionario.SelecionarVeiculo();
+                            if (AcervoReservas.SelecionarReserva(idVeiculo) != null && AcervoReservas.SelecionarReserva(idVeiculo).PagamentoCliente.StatusPagamento ==
+                                GerenciamentoInterno.Pagamentos.StatusPagamentoEnum.Pago)
+                            {
+                                EstoqueVeiculos.ExcluirVeiculo(idVeiculo);
+                            }
+                            break;
+                        case 6:
+                            sair = true;
+                            break;
+                        default:
+                            Console.WriteLine("Opção inválida. Tente novamente.");
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                Console.WriteLine("Entrada inválida. Tente novamente.");
-            }
+                else
+                {
+                    Console.WriteLine("Entrada inválida. Tente novamente.");
+                }
+
+                Console.WriteLine("Pressione Enter para continuar...");
+                Console.ReadLine();
+
+            } while (!sair);
         }
-
-        private static string[] InformacoesVeiculo()
-        {
-            Console.WriteLine("Informe os dados do veículo separados por vírgula:");
-            Console.WriteLine("Número de assentos, número de portas, preço da diária, modleo do carro, placa do carro, tipo de veículo");
-
-        }  
     }
 }
-
