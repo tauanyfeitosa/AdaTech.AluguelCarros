@@ -2,9 +2,8 @@
 namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
 {
     using Veiculos;
-    using GerenciamentoInterno;
-    using AdaTech.AluguelCarros.GerenciadorAluguelCarros.GerenciamentoInterno.Reservas;
-    using AdaTech.AluguelCarros.GerenciadorAluguelCarros.GerenciamentoInterno.Pagamentos;
+    using GerenciamentoInterno.Reservas;
+    using GerenciamentoInterno.Pagamentos;
 
     internal class Cliente
     {
