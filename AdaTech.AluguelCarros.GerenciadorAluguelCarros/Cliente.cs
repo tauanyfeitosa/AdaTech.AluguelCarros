@@ -1,6 +1,7 @@
 ﻿
 namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros
 {
+    using Veiculos;
     using GerenciamentoInterno;
     internal class Cliente
     {
@@ -8,7 +9,6 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros
         private readonly string? _cpf;
         private readonly string? _nome;
         private readonly string? _cnh;
-        private Reserva? _reserva;
         private int _idade;
         private bool _possuiCNH;
 
@@ -30,6 +30,14 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros
         {
             get { return _possuiCNH; }
             set { _possuiCNH = value; }
+        }
+
+        internal void FazerReserva (int idVeiculo, DateTime dataInicio, DateTime dataFim)
+        {
+            Veiculo veiculo = EstoqueVeiculos.SelecionarVeiculo(idVeiculo);
+            var reservaCliente = new Reserva(idVeiculo, veiculo, this, dataInicio, dataFim);
+
+            EstoqueReservas.AdicionarReserva(reservaCliente);
         }
     }
 }
