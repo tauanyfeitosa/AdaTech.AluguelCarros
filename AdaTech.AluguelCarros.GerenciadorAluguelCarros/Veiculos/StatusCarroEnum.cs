@@ -1,7 +1,7 @@
 ﻿
 namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
 {
-    internal enum StatusCarro
+    internal enum StatusCarroEnum
     {
         Disponivel = 1,
         Reservado = 2,

@@ -1,6 +1,6 @@
 ﻿namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.GerenciamentoInterno.Pagamentos
 {
-    internal enum StatusPagamento
+    internal enum StatusPagamentoEnum
     {
         Pago = 1,
         EmAberto = 2,

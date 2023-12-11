@@ -1,7 +1,7 @@
 ﻿
 namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Veiculos
 {
-    internal enum TipoVeiculos
+    internal enum TipoVeiculosEnum
     {
         Carro = 1,
         Moto = 2,
