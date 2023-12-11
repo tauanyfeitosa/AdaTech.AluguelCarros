@@ -10,6 +10,8 @@
         private TipoPagamento _tipoPagamento;
         private decimal _saldoCliente;
 
+        public StatusPagamento StatusPagamento { get { return _statusPagamento; } }
+
         internal PagamentoCliente(Reserva reserva, TipoPagamento tipoPagamento)
         {
             _valorDevido = reserva.Veiculo.CalcularAluguel(reserva.Dias);

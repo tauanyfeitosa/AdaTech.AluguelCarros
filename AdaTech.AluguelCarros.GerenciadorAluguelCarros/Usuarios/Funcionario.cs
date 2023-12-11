@@ -1,6 +1,9 @@
 ﻿
 namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
 {
+    using GerenciamentoInterno.Reservas;
+    using GerenciamentoInterno.Pagamentos;
+    using GerenciamentoInterno.RetiradasDevolucoes;
     using Veiculos;
     internal class Funcionario
     {
@@ -27,6 +30,25 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
         {
             EstoqueVeiculos.AdicionarVeiculo(assentos, portas, precoDiria, modelo, placa, veiculos);
 
+        }
+
+        internal bool VerificarPagamentoCliente (int id)
+        {
+            var reserva = AcervoReservas.SelecionarReserva(id);
+            if (reserva.PagamentoCliente.StatusPagamento == StatusPagamento.Pago)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        internal void AutorizarRetirada (int id)
+        {
+            var reserva = AcervoReservas.SelecionarReserva(id);
+            if (VerificarPagamentoCliente(id))
+            {
+                var retiradaVeiculo = new RetiradaVeiculo(reserva);
+            }
         }
     }
 }

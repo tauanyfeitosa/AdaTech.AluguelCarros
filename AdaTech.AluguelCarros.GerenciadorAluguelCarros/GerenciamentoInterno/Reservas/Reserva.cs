@@ -19,6 +19,7 @@
         public int Id { get { return _id; } }
         public Veiculo Veiculo { get { return _veiculo; } }
         public int Dias { get { return _dias; } }
+        public DateTime DataInicio { get { return _dataInicio; } }
         public PagamentoCliente PagamentoCliente { get { return _pagamentoCliente; } }
 
         private void CalcularDias()
