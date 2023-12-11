@@ -10,13 +10,14 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros
         {
             while (true)
             {
-                Console.WriteLine("Informe abaixo qual o seu vínculo: 1 - Funcionário\n2- Cliente");
+                Console.WriteLine("Informe abaixo qual o seu vínculo: \n1 - Funcionário\n2- Cliente");
                 if (int.TryParse(Console.ReadLine(), out int selecaoUsuario))
                 {
                     switch (selecaoUsuario)
                     {
                         case 1:
                             var funcionario = InterfaceFuncionarioLogin.AdicionarFuncionario();
+                            MenuFuncionario.ExibirMenu(funcionario);
                             break;
                         case 2:
                             break;

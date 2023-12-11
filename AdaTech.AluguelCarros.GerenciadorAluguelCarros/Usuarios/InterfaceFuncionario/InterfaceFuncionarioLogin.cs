@@ -1,4 +1,6 @@
 ﻿
+using AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.AcervoUsuarios;
+
 namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFuncionario
 {
     internal class InterfaceFuncionarioLogin

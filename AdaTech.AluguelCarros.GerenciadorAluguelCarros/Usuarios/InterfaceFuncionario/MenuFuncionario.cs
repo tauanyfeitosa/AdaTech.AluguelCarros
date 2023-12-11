@@ -1,6 +1,4 @@
 ﻿
-using System;
-
 namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFuncionario
 {
     internal class MenuFuncionario
@@ -27,7 +25,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFunci
                             VisualizarInformacoesPessoais(funcionario);
                             break;
                         case 2:
-                            RealizarTarefaEspecifica(funcionario);
+                            MenuTarefasEspecificas(funcionario);
                             break;
                         case 3:
                             sair = true;
@@ -54,10 +52,44 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFunci
             Console.WriteLine($"CPF: {funcionario.LoginCPF}");
         }
 
-        private static void RealizarTarefaEspecifica(Funcionario funcionario)
+        private static void MenuTarefasEspecificas(Funcionario funcionario)
         {
-            Console.WriteLine("Executando tarefa específica para o funcionário...");
+            Console.WriteLine("\n\nEscolha uma opção de suas tarefas específicas:");
+            Console.WriteLine("1. Cadastrar Veículo");
+            Console.WriteLine("2. Verificar o pagamento do cliente.");
+            Console.WriteLine("3. Autorizar retirada do veiculo.");
+            Console.WriteLine("4. Retirar veículo (mesmo fora do prazo)");
+            Console.WriteLine("5. Excluir veículo.");
+            Console.WriteLine("6. Sair.");
+
+            if (int.TryParse(Console.ReadLine(), out int escolha))
+            {
+                switch (escolha)
+                {
+                    case 1:
+                        funcionario.CadastrarVeiculo()
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida. Tente novamente.");
+            }
         }
+
+        private static string[] InformacoesVeiculo()
+        {
+            Console.WriteLine("Informe os dados do veículo separados por vírgula:");
+            Console.WriteLine("Número de assentos, número de portas, preço da diária, modleo do carro, placa do carro, tipo de veículo");
+
+        }  
     }
 }
 

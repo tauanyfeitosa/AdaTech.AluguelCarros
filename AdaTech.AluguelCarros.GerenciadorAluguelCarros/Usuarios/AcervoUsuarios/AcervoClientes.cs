@@ -1,16 +1,15 @@
-﻿
-namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
+﻿namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.AcervoUsuarios
 {
     internal class AcervoClientes
     {
         private static List<Cliente>? _clientes;
 
-        internal static void AdicionarCliente (Cliente cliente)
+        internal static void AdicionarCliente(Cliente cliente)
         {
             _clientes.Add(cliente);
         }
 
-        internal static Cliente SelecionarCliente (string cpf)
+        internal static Cliente SelecionarCliente(string cpf)
         {
             var clienteSelecionado = _clientes.FirstOrDefault(cliente => cliente.Cpf == cpf);
             return clienteSelecionado;

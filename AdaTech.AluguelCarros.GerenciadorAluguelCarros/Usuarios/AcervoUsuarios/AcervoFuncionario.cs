@@ -1,5 +1,4 @@
-﻿
-namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
+﻿namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.AcervoUsuarios
 {
     internal class AcervoFuncionario
     {
