@@ -1,9 +1,8 @@
-﻿
-namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.GerenciamentoInterno
+﻿namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.GerenciamentoInterno.Reservas
 {
-    internal class EstoqueReservas
+    internal class AcervoReservas
     {
-        private static List <Reserva> _listaReservas = new List <Reserva>();
+        private static List<Reserva> _listaReservas = new List<Reserva>();
 
         internal static void AdicionarReserva(Reserva reserva)
         {
