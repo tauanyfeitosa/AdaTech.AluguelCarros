@@ -12,7 +12,11 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios
         private string? _senha;
         private bool _ativo;
 
-        public string ? LoginCPF => _loginCPF;
+        public string? Nome => _nome;
+        public int Id => _id;
+        public string? LoginCPF => _loginCPF;
+        public string? Senha => _senha;
+        public bool Ativo => _ativo;
 
         public Funcionario(string nome, string loginCPF, string senha, string confirmacaoSenha)
         {
