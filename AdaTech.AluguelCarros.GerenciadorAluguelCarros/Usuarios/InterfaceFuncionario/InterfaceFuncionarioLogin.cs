@@ -5,7 +5,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFunci
 {
     internal class InterfaceFuncionarioLogin
     {
-        internal static Funcionario AdicionarFuncionario()
+        internal static (Funcionario funcionario, int resultado) AdicionarFuncionario()
         {
             Console.WriteLine("Informe o CPF do funcionário:");
             var cpfFuncionario = Console.ReadLine().Replace(".", "").Replace("-", "");
@@ -15,7 +15,7 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFunci
             if (funcionarioExistente != null)
             {
                 Console.WriteLine("Funcionário já existe na lista.");
-                return funcionarioExistente;
+                return (funcionarioExistente, 0);
             }
 
             Console.WriteLine("O funcionário não foi encontrado em nosso sistema, faremos o " +
@@ -31,12 +31,24 @@ namespace AdaTech.AluguelCarros.GerenciadorAluguelCarros.Usuarios.InterfaceFunci
 
                 AcervoFuncionario.AdicionarFuncionario(novoFuncionario);
                 Console.WriteLine("Funcionário adicionado com sucesso!");
-                return novoFuncionario;
+                return (novoFuncionario, 1);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return null;
+                return (null, 2);
+            }
+        }
+
+        internal static (Funcionario funcionario, int resultado) LoginFuncionario (Funcionario funcionario) 
+        {
+            var senhaAcesso = ObterSenha();
+            if (senhaAcesso != funcionario.Senha)
+            {
+                return (funcionario, -1);
+            } else
+            {
+                return (funcionario, 3);
             }
         }
 

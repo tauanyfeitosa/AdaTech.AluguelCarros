@@ -12,7 +12,7 @@ namespace AdaTech.AluguelCarros.ConsoleMenuLibrary
             selectedIndex = 0;
         }
 
-        public void ShowMenu()
+        public int ShowMenu()
         {
             ConsoleKeyInfo key;
             do
@@ -34,12 +34,13 @@ namespace AdaTech.AluguelCarros.ConsoleMenuLibrary
                 }
             } while (key.Key != ConsoleKey.Enter);
 
-            Console.WriteLine($"Selected option: {items[selectedIndex]}");
+            Console.WriteLine($"\nOpção selecionada: {items[selectedIndex]}\n\n");
+            return selectedIndex;
         }
 
         private void DisplayMenu()
         {
-            Console.WriteLine("Select an option:");
+            Console.WriteLine("Selecione uma opção:");
 
             for (int i = 0; i < items.Length; i++)
             {
